@@ -4,6 +4,18 @@ import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Box } from "./People";
 import { Loading } from "./People";
+import { theme } from "./ThemeStyle";
+import style from "styled-theming";
+
+const getForeground = style('mode', {
+  light: theme.light.color,
+  dark: theme.dark.color
+});
+
+const getRouteLink = style('mode', {
+  light: theme.light.routeLinkColor,
+  dark: theme.dark.routeLinkColor
+});
 
 const FilmDiv = styled.div`
     ul{
@@ -11,14 +23,14 @@ const FilmDiv = styled.div`
         li {
             list-style: none;
             padding: 10px 0;
-            color: white;
+            color: ${getForeground};
             font-size: 25px;
         }
     } 
     .title a {
-        color: #efa00d;
+        color: ${getRouteLink};
         a {
-            color: white;
+            color: ${getForeground};
         }
     }
 `;

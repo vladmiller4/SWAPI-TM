@@ -4,25 +4,37 @@ import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Box } from "./People";
 import { Loading } from "./People";
+import { theme } from "./ThemeStyle";
+import style from "styled-theming";
+
+const getForeground = style('mode', {
+  light: theme.light.color,
+  dark: theme.dark.color
+});
+
+const getRouteLink = style('mode', {
+  light: theme.light.routeLinkColor,
+  dark: theme.dark.routeLinkColor
+});
 
 const PersonDiv = styled.div`
     .title a {
-        color: #efa00d;
+        color: ${getRouteLink};
         a {
-            color: white;
+            color: ${getForeground};
         }
     }
     ul {
         padding: 0;
         li {
             list-style: none;
-            color: white;
+            color: ${getForeground};
             padding: 10px 0;
             font-size: 25px;
         }
 
         a {
-            color: white;
+            color: ${getForeground};
         }
     }
 `;

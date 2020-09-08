@@ -4,6 +4,23 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Box } from "./People";
 import { Loading } from "./People";
+import { theme } from "./ThemeStyle";
+import style from "styled-theming";
+
+const getForeground = style('mode', {
+  light: theme.light.color,
+  dark: theme.dark.color
+});
+
+const getHover = style('mode', {
+  light: theme.light.hover,
+  dark: theme.dark.hover
+});
+
+const getBackColor = style('mode', {
+  light: theme.light.backColor,
+  dark: theme.dark.backColor
+});
 
 const FilmsDiv = styled.div`
     width: 100%;
@@ -15,11 +32,15 @@ const FilmsDiv = styled.div`
             list-style: none;
             padding: 10px 0;
             &:hover {
-              background-color: #efa00d42;
+              background-color: ${getHover};
+              color: ${getBackColor};
+            }
+            &:hover a {
+              color: ${getBackColor};
             }
             a {
                 display: block;
-                color: white;
+                color: ${getForeground};
                 text-decoration: none;
                 font-size: 25px;
             }

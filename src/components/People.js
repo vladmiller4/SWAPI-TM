@@ -2,6 +2,33 @@ import React, { useState, useEffect} from "react";
 import axios from "axios";
 import { PersonListItem } from "./PersonListItem"
 import styled from "styled-components";
+import { theme } from "./ThemeStyle";
+import style from "styled-theming";
+
+const getBackground = style('mode', {
+    light: theme.light.background,
+    dark: theme.dark.background
+});
+
+const getOldBackground = style('mode', {
+    light: theme.light.backgroundOld,
+    dark: theme.dark.backgroundOld
+});
+
+const getForeground = style('mode', {
+    light: theme.light.color,
+    dark: theme.dark.color
+});
+
+const getHover = style('mode', {
+    light: theme.light.hover,
+    dark: theme.dark.hover
+});
+
+const getBackColor = style('mode', {
+    light: theme.light.backColor,
+    dark: theme.dark.backColor
+});
 
 export const Box = styled.div`
     margin: 0 auto;
@@ -10,9 +37,7 @@ export const Box = styled.div`
     display: flex;
     justify-content: space-around;
     border-radius: 10px;
-    background: #AA076B; 
-    background: -webkit-linear-gradient(to right, #61045F, #AA076B); 
-    background: linear-gradient(to right, #61045F44, #AA076B44);
+    border: 2px solid ${getForeground};   
 `
 
 export const Loading = styled.div`
@@ -21,13 +46,12 @@ export const Loading = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: #8E2DE2;  
-    background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);  
-    background: linear-gradient(to right, #4A00E0, #8E2DE2); 
+    background-color: ${getOldBackground};
+    background: ${getBackground};  
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: ${getForeground};
     font-size: 30px;
 `
 
@@ -36,14 +60,21 @@ const PeopleDiv = styled.div`
         display: flex;
         flex-direction: column;
         .input{
+            background: ${getHover};
             width: 40%;
             height: 30px;
             text-align: center;
             font-size: 25px;
+            color: ${getBackColor};
             padding: 10px 0;
             margin-left: 30%;
             margin-bottom: 30px;
             border-radius: 10px;
+            outline: none;
+            border: 2px solid ${getForeground};
+            ::placeholder {
+                color: ${getBackColor};
+            }
         }
    
         a {
@@ -53,7 +84,7 @@ const PeopleDiv = styled.div`
         .no-results {
             font-size: 25px;
             text-align: center;
-            color: white;
+            color: ${getForeground};
         }
 `
 
@@ -77,7 +108,7 @@ export function People () {
     useEffect(() => {
         setFilteredPersons(
             people.filter(person => {
-                return person.name.toLowerCase().includes( search.toLowerCase())
+                return person.name.toLowerCase().includes( search.toLowerCase());
             })
         )
     }, [search, people])
